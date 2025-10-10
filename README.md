@@ -4,6 +4,10 @@
 - Pedro Nunes (LEI-122704)
 - Sebastian Rodriguez (LEI-122667)
 
+# Link do Video com a implementação
+
+Youtube: https://youtu.be/uwVRDrQ27k8
+
 # Criação de uma pipeline de CI/CD com GitHub Actions
 
 Neste projeto utiliza-se uma pipeline de CI configurada com GitHubActions.
