@@ -4,6 +4,54 @@
 - Pedro Nunes (LEI-122704)
 - Sebastian Rodriguez (LEI-122667)
 
+# Criação de uma pipeline de CI/CD com GitHub Actions
+
+Neste projeto utiliza-se uma pipeline de CI configurada com GitHubActions.
+O objetivo da pipeline é automatizar o processo de build do projeto Mave e criar um ficheiro .jar sempre que houverem push no branch main.
+
+## Funcionalidades da Pipeline
+
+A pipeline vai passar por várias etapas:
+
+1. **Sempre que ocorrer um push no branch `main` ela é executada.**.  
+2. **Setup no ambiente Java** (versão 21, neste caso).  
+3. **Faz o checkout** no repositório.  
+4. **Executa o comando Maven** `mvn clean package` para compilar o projeto e criar o ficheiro `.jar`.  
+5. **Publica o ficheiro criado** (o `.jar`) como resultado do workflow, disponível para download no GitHub.
+
+## Ficheiro: `.github/workflows/build.yml`
+
+```yaml
+name: Build JAR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-jar
+          path: target/*.jar
+```
 # App README
 
 - [ ] TODO Replace or update this README with instructions relevant to your application
