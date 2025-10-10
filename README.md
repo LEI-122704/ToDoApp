@@ -17,7 +17,7 @@ A pipeline vai passar por várias etapas:
 2. **Setup no ambiente Java** (versão 21, neste caso).  
 3. **Faz o checkout** no repositório.  
 4. **Executa o comando Maven** `mvn clean package` para compilar o projeto e criar o ficheiro `.jar`.  
-5. **Publica o ficheiro criado** (o `.jar`) como resultado do workflow, disponível para download no GitHub.
+5. **Publica o ficheiro criado** (`.jar`) como resultado do workflow, disponível para download no GitHub.
 
 ## Ficheiro: `.github/workflows/build.yml`
 
