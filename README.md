@@ -1,3 +1,9 @@
+# Membros do Grupo
+- André Matias (LEI-122686)
+- Duarte Rodrigues (LEI-122696)
+- Pedro Nunes (LEI-122704)
+- Sebastian Rodriguez (LEI-122667)
+
 # App README
 
 - [ ] TODO Replace or update this README with instructions relevant to your application

@@ -3,10 +3,12 @@ package com.example.examplefeature.ui;
 import com.example.base.ui.component.ViewToolbar;
 import com.example.examplefeature.Task;
 import com.example.examplefeature.TaskService;
+import com.example.pdf.PDFGenerator;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
@@ -14,11 +16,15 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import org.springframework.data.domain.Pageable;
 
+import java.io.ByteArrayInputStream;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.List;
 import java.util.Optional;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringPageRequest;
@@ -50,6 +56,16 @@ class TaskListView extends Main {
 
         createBtn = new Button("Create", event -> createTask());
         createBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        StreamResource pdfResource = new StreamResource("tasks_list.pdf",
+                () -> new ByteArrayInputStream(PDFGenerator.generateTaskListPDF(taskService.list(Pageable.unpaged())))
+        );
+
+        Anchor downloadLink = new Anchor(pdfResource, "Gerar PDF");
+        downloadLink.getElement().setAttribute("download", true);
+
+        add(new ViewToolbar("Task List", ViewToolbar.group(description, dueDate, createBtn, downloadLink)));
+
+
 
         var dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(getLocale())
                 .withZone(ZoneId.systemDefault());

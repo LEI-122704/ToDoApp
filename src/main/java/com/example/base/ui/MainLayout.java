@@ -40,6 +40,7 @@ public final class MainLayout extends AppLayout {
         nav.addClassNames(Margin.Horizontal.MEDIUM);
         MenuConfiguration.getMenuEntries().forEach(entry -> nav.addItem(createSideNavItem(entry)));
         nav.addItem(new SideNavItem("Conversor de Moedas", "currency-converter"));
+        nav.addItem(new SideNavItem("Envio de Emails", "email-sender"));
         return nav;
     }
 
