@@ -1,0 +1,36 @@
+name: SonarQube Analysis Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Clonar o repositório
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Recomendado para melhorar a relevância do relatório
+
+      # 2. Executar análise SonarQube
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # 3. Verificar status do Quality Gate
+      - name: SonarQube Quality Gate Check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          pollingTimeoutSec: 600
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # 4. Exemplo de como usar o status do Quality Gate
+      - name: Show SonarQube Quality Gate Status
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
