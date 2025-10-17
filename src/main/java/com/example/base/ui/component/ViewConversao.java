@@ -4,7 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -23,7 +23,7 @@ public class ViewConversao extends VerticalLayout {
         setPadding(true);
         setSpacing(true);
 
-        Label title = new Label("Conversor de Moedas");
+        Span title = new Span("Conversor de Moedas"); // 🔁 Label → Span
         title.getStyle().set("font-size", "24px").set("font-weight", "bold");
         add(title);
 
@@ -43,7 +43,7 @@ public class ViewConversao extends VerticalLayout {
 
         // Botão de converter
         Button converterBtn = new Button("Converter");
-        Label resultadoLabel = new Label("");
+        Span resultadoLabel = new Span("");
 
         converterBtn.addClickListener(e -> {
             try {
