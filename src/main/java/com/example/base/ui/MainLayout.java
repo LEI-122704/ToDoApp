@@ -41,6 +41,7 @@ public final class MainLayout extends AppLayout {
         MenuConfiguration.getMenuEntries().forEach(entry -> nav.addItem(createSideNavItem(entry)));
         nav.addItem(new SideNavItem("Conversor de Moedas", "currency-converter"));
         nav.addItem(new SideNavItem("Envio de Emails", "email-sender"));
+        nav.addItem(new SideNavItem("Gerador de QR Codes", "qrcode-tool"));
         return nav;
     }
 
